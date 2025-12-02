@@ -14,7 +14,7 @@ def part1(data: List[str]) -> int:
     invalid = 0
     for rng in data:
         low, high = rng.split("-")
-        for val in range(int(low), int(high)):
+        for val in range(int(low), int(high)+1):
             s = str(val)
             t = len(s) // 2
             if s[:t] == s[t:]:
