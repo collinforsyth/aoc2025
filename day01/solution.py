@@ -32,7 +32,7 @@ def part2(data: str) -> int:
             # distance to previous multiple of 100
             offset = start % 100
             if offset == 0:
-                offset = 100 
+                offset = 100
             crossings = 0
             if dist >= offset:
                 crossings = 1 + (dist - offset) // 100
@@ -47,6 +47,7 @@ def part2(data: str) -> int:
             start += dist
         count += crossings
     return count
+
 
 def main():
     text = INPUT_PATH.read_text().rstrip("\n")
