@@ -1,6 +1,5 @@
-# aoc2025/day1/solution.py
 from pathlib import Path
-from typing import List, Dict
+from typing import List
 
 CURR_DIR = Path(__file__).parent
 INPUT_PATH = CURR_DIR / "input.txt"
