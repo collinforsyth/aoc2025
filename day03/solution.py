@@ -24,7 +24,7 @@ def part1(data: List[str]) -> int:
     return result
 
 
-def part2(data: str) -> int:
+def part2(data: List[str]) -> int:
     result = 0
     for line in data:
         max_voltage: List[int] = []

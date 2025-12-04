@@ -1,0 +1,7 @@
+{
+    "github.copilot.enable": {
+        "*": true,
+        "python": false
+    },
+    "vim.useSystemClipboard": true
+}
