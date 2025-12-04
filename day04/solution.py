@@ -6,7 +6,7 @@ CURR_DIR = Path(__file__).parent
 INPUT_PATH = CURR_DIR / "input.txt"
 
 
-def parse_input(text: str):
+def parse_input(text: str) -> List[List[str]]:
     return [list(line) for line in text.strip().splitlines()]
 
 
@@ -39,8 +39,8 @@ def part2(grid: List[List[str]]) -> int:
             for col_idx, val in enumerate(row):
                 if val == '$':
                     # mark as removed
-                    curr +=1
                     grid[row_idx][col_idx] = '.'
+                    curr +=1
         if curr == 0:
             break
         result+=curr
