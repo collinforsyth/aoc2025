@@ -31,6 +31,51 @@ def count_paths(
             counts[neighbor] += counts[n]
     return counts[end]
 
+def count_paths_with_ignores(
+    nodes: dict[str, set[str]],
+    sorted: list[str],
+    start: str,
+    end: str,
+    a: str,
+    b: str,
+) -> int:
+    counts: dict[str, list[int]] = {
+        node: [0, 0, 0, 0] for node in sorted
+    }
+
+    # state indexes:
+    # 0 == not a or b
+    # 1 == a
+    # 2 == b
+    # 3 == both
+    start_state = 0
+    if start == a:
+        start_state |= 1  # saw a
+    if start == b:
+        start_state |= 2  # saw b
+
+    counts[start][start_state] = 1
+
+    # propagate in topological order
+    for n in sorted:
+        if n not in nodes:
+            continue
+
+        for state in range(4):
+            paths_to_here = counts[n][state]
+            if paths_to_here == 0:
+                continue
+
+            for neighbor in nodes[n]:
+                new_state = state
+                if neighbor == a:
+                    new_state |= 1
+                if neighbor == b:
+                    new_state |= 2
+
+                counts[neighbor][new_state] += paths_to_here
+
+    return counts[end][3]
 
 def topological_sort(nodes: dict[str, set[str]]) -> list[str]:
     all_nodes = set(nodes.keys())
@@ -62,7 +107,8 @@ def topological_sort(nodes: dict[str, set[str]]) -> list[str]:
 
 
 def part2(nodes: dict[str, set[str]]) -> int:
-    return 2
+    sorted = topological_sort(nodes)
+    return count_paths_with_ignores(nodes, sorted, 'svr', 'out', 'dac', 'fft')
 
 
 def main():
